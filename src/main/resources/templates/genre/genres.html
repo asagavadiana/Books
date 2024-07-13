@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            background-color: lavender;
+            color: #333;
+        }
+
+        h1 {
+            color: #6a5acd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        button {
+            background-color: #6a5acd;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #4b0082;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content form label {
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .modal-content form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .modal-content form button[type="submit"] {
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .modal-content form button[type="submit"]:hover {
+            background-color: #4b0082;
+        }
+    </style>
+</head>
+<body>
+<h1>Genres</h1>
+<div th:each="genre, iterStat : ${genres}">
+    <h2 th:text="${genre.name}">Genre Name</h2>
+</div>
+<button><a class="navbar-brand" href="/genres/add">Add New Genre</a>></button>
+
+<div id="addGenreModal" class="modal">
+    <div class="modal-content">
+        <h2>Add New Genre</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="genre, iterStat : ${genres}">
+                <th scope="row" th:text="${iterStat.index + 1}">1</th>
+                <td th:text="${genre.name}">Genre Name</td>\
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
